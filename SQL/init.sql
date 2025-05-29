@@ -34,7 +34,7 @@ CREATE TABLE Employee (
 );
 
 INSERT INTO Company (Name, Address, Phone, Description) VALUES 
-('Ukr Post', 'Khreshchatyk 22, Kyiv', '044 467 8223', 'Holovposhtamt Kyyiv. Holovna Poshta Krayiny');
+('Post', 'Khreshchatyk 22, Kyiv', '044 467 8223', 'Holovposhtamt Kyyiv. Holovna Poshta Krayiny');
 
 INSERT INTO Department (id, Name) VALUES
 (10, 'IT'),
