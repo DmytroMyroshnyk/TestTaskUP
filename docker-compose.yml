@@ -1,0 +1,31 @@
+﻿services:
+  webapp:
+    build: .
+    container_name: razor_app
+    ports:
+      - "5000:8080"
+    depends_on:
+      - pgsql
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=pgsql;Port=5432;Database=companydb;Username=postgres;Password=123456"
+    networks:
+      - appnet
+
+  pgsql:
+    image: postgres:15
+    restart: always
+    container_name: pgsql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: companydb
+    volumes:
+      - ./SQL:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - appnet
+
+networks:
+  appnet:

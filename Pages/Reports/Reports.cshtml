@@ -1,0 +1,46 @@
+﻿@page
+@model SalaryReportModel
+
+<h2>Зарплатна звітність</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Виберіть відділ:</label>
+        <select asp-for="SelectedDepartmentId" asp-items="Model.Departments" class="form-control"></select>
+    </div>
+    <button type="submit" asp-page-handler="Generate" class="btn btn-primary">Сформувати</button>
+    @if (Model.ReportItems != null && Model.ReportItems.Any())
+    {
+        <button type="submit" asp-page-handler="Export" class="btn btn-secondary">Експортувати в TXT</button>
+    }
+</form>
+
+@if (Model.ReportItems != null && Model.ReportItems.Any())
+{
+    <h4 class="mt-4">Результати</h4>
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>Відділ</th>
+                <th>Кількість Співробітників</th>
+                <th>Сума зарплат</th>
+                <th>Мінімальна зарплата</th>
+                <th>Максимальна зарплата</th>
+                <th>Середня зарплата</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ReportItems)
+            {
+                <tr>
+                    <td>@item.DepartmentName</td>
+                    <td>@item.EmployeeCount</td>
+                    <td>@item.Salary</td>
+                    <td>@item.MinSalary</td>
+                    <td>@item.MaxSalary</td>
+                    <td>@item.AvgSalary.ToString("F2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

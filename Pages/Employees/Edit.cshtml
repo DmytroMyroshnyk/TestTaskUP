@@ -1,0 +1,56 @@
+﻿@page "{id:int}"
+@model EditModel
+
+<h2>Редагувати працівника</h2>
+
+<form method="post">
+    <input asp-for="Employee.Id" type="hidden" />
+    <div class="mb-3">
+        <label>Ім'я</label>
+        <input asp-for="Employee.FirstName" class="form-control" />
+        <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Прізвище</label>
+        <input asp-for="Employee.LastName" class="form-control" />
+        <span asp-validation-for="Employee.LastName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>По батькові</label>
+        <input asp-for="Employee.MiddleName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Адреса</label>
+        <input asp-for="Employee.Address" class="form-control" />
+        <span asp-validation-for="Employee.Address" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Телефон</label>
+        <input asp-for="Employee.Phone" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Дата Народження</label>
+        <input asp-for="Employee.BirthDate" type="date" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Дата найму</label>
+        <input asp-for="Employee.HireDate" type="date" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Зарплатня</label>
+        <input asp-for="Employee.Salary" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Департамент</label>
+        <select asp-for="Employee.DepartmentId" asp-items="Model.DepartmentOptions" class="form-control"></select>
+    </div>
+    <div class="mb-3">
+        <label>Посада</label>
+        <select asp-for="Employee.PositionId" asp-items="Model.PositionOptions" class="form-control" ></select>
+    </div>
+@*     <div class="mb-3">
+        <label>Компанія</label>
+        <select asp-for="Employee.CompanyId" class="form-control" asp-items="Model.Companies"></select>
+    </div> *@
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+</form>

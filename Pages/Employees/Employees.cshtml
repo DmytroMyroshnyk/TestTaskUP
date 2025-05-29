@@ -1,0 +1,65 @@
+﻿@page
+@using TestTaskUP.EnumHelpers
+@using TestTaskUP.Enums
+@model TestTaskUP.Pages.Employees.EmployeesModel
+@{
+    ViewData["Title"] = "Персонал";
+}
+
+<h2>Фільтрація персоналу</h2>
+
+<form method="get">
+    <div class="d-flex gap-2 mb-2">
+        <input type="text" name="Search" placeholder="ПІБ" value="@Model.Search"
+               class="form-control form-control-sm" style="max-width: 200px;" />
+
+        <select asp-for="DepartmentId" asp-items="Model.DepartmentOptions"
+                class="form-select form-select-sm" style="max-width: 180px;">
+            <option value="">Всі відділи</option>
+        </select>
+    </div>
+    <div class="d-flex gap-2 mb-2">
+        <button type="submit" class="btn btn-primary btn-sm">Пошук</button>
+    </div>
+</form>
+
+<form method="post" asp-page-handler="Export">
+    <input type="hidden" name="DepartmentId" value="@Model.DepartmentId" />
+    <input type="hidden" name="Search" value="@Model.Search" />
+    <button type="submit" class="btn btn-outline-secondary">Експортувати в TXT</button>
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ПІБ</th>
+            <th>Оклад</th>
+            <th>Посада</th>
+            <th>Дата Народження</th>
+            <th>Департамент</th>
+            <th>Телефон</th>
+            <th>Компанія</th>
+            <th>Редагувати</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model.Employees)
+        {
+            <tr>
+                <td>@emp.FullName</td>
+                <td>@emp.Salary</td>
+                <td>@emp.PositionName</td>
+                <td>@emp.BirthDate.ToString("dd MMMM yyyy")</td>
+                <td>@emp.DepartmentName</td>
+                <td>@emp.Phone</td>
+                <td>@emp.CompanyName</td>
+                <td>
+                    <a asp-page="/Employees/Edit" asp-route-id="@emp.Id" title="Редагувати">
+                        <img src="/icons/svgviewer-output.svg" alt="Edit" width="20" height="20" />
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
